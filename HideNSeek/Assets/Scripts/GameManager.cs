@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Postavke")]
+    [Header("Settings")]
     public int minutesHiding = 1;
     public int minutesSeeking = 5;
-    [Header("Reference")]
+    public bool isRemote;
+    [Header("Refferences")]
     public GameObject hiderCam;
     public PlayerMovement hiderPM;
     public GameObject seeker;
@@ -21,8 +22,10 @@ public class GameManager : MonoBehaviour
     TextMeshProUGUI seekTimerText;
     TextMeshProUGUI winnerText;
     public GameObject retryButton;
+    public GameObject remoteHiderEndMenu;
+    public TMP_InputField seekCodeField;
     float timer;
-    bool seeking; // false = faza skrivanja; true = faza trazenja
+    bool seeking; // false = hiding phase; true = seeking phase
     public bool canHide;
     bool roundOver;
 
@@ -49,17 +52,11 @@ public class GameManager : MonoBehaviour
 
         if (timer <= 0)
         {
-            if (!seeking) // kraj skrivanja
+            if (!seeking) // hiding over
             {
                 if (canHide)
                 {
-                    timer = minutesSeeking * 60;
-                    seeking = true;
-                    hiderCam.SetActive(false);
-                    hiderPM.enabled = false;
-                    seeker.SetActive(true);
-                    hideTimerUI.SetActive(false);
-                    seekTimerUI.SetActive(true);
+                    EndHide();
                 }
                 else
                 {
@@ -67,12 +64,12 @@ public class GameManager : MonoBehaviour
                 }
                 
             }
-            else // kraj trazenja
+            else // seeking over
             {
                 if (!roundOver)
                 {
                     //seekTimerUI.SetActive(false);
-                    Winner("Hider"); // hider pobjedjuje
+                    Winner("Hider"); // hider wins
                 }
             }
         }
@@ -116,5 +113,53 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void BackToMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    string GenerateSeekCode()
+    {
+        LevelGenerator.Scripts.LevelGenerator lg = FindObjectOfType<LevelGenerator.Scripts.LevelGenerator>();
+        string seekCode = lg.Seed + "\n" + hiderPM.gameObject.transform.position /*+ "\n" + hiderPM.transform.rotation*/;
+        // encode base64
+        return seekCode;
+    }
+
+    public void CopySeekCode()
+    {
+        GUIUtility.systemCopyBuffer = seekCodeField.text;
+    }
+
+    public void EndHide()
+    {
+        timer = minutesSeeking * 60;
+        seeking = true;
+        if (!isRemote)
+        {
+            hiderCam.SetActive(false);
+        }
+        hiderPM.enabled = false;
+        if (!isRemote)
+        {
+            seeker.SetActive(true);
+        }
+        hideTimerUI.SetActive(false);
+        if (!isRemote)
+        {
+            seekTimerUI.SetActive(true);
+        }
+
+        if (isRemote) // when playing a remote game, here we show the seek code and go back to the menu
+        {
+            Time.timeScale = 0;
+            seekCodeField.text = GenerateSeekCode();
+            remoteHiderEndMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }

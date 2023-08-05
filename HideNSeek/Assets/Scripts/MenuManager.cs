@@ -9,8 +9,13 @@ public class MenuManager : MonoBehaviour
 {
     public Toggle levelToggle;
     public TMP_InputField seedInputField;
-    bool randomLevel;
+    public TMP_InputField seekCodeInputField;
+    bool randomLevel = true;
     int seed;
+    bool isRemote;
+    bool hasSeekCode;
+    Vector3 SC_hiderPos;
+    //Vector3 SC_hiderRot;
 
     private void Awake()
     {
@@ -45,6 +50,15 @@ public class MenuManager : MonoBehaviour
                 lg.Seed = seed;
                 Debug.Log("LG got: " + seed);
             }
+
+            gm.isRemote = isRemote;
+
+            if (hasSeekCode)
+            {
+                gm.hiderPM.gameObject.transform.position = SC_hiderPos;
+                //gm.hiderPM.gameObject.transform.rotation = SC_hiderRot;
+                gm.EndHide();
+            }
         }
     }
 
@@ -52,6 +66,17 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("HideNSeek");
         StartCoroutine(DoYourThing());
+    }
+
+    public void HostGame()
+    {
+        isRemote = true;
+        StartGame();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void ToggleLevel()
@@ -72,5 +97,16 @@ public class MenuManager : MonoBehaviour
     {
         seed = int.Parse(seedInputField.text);
         Debug.Log("Updated seed:" + seed);
+    }
+
+    public void ParseSeekCode()
+    {
+        // decode base64
+        string[] seekCode = seekCodeInputField.text.Split("\n");
+        seed = int.Parse(seekCode[0]);
+        randomLevel = false;
+        string[] SC_hiderPos_str = seekCode[1].Split(",");
+        SC_hiderPos = new Vector3(float.Parse(SC_hiderPos_str[0]), float.Parse(SC_hiderPos_str[1]), float.Parse(SC_hiderPos_str[2]));
+        StartGame();
     }
 }
