@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using LevelGenerator.Scripts.Helpers;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -36,6 +37,7 @@ namespace LevelGenerator.Scripts
         protected int order;
 
         public Renderer cubeRenderer;
+        Material myMaterial;
 
         public void Initialize(LevelGenerator levelGenerator, int sourceOrder)
         {
@@ -51,9 +53,10 @@ namespace LevelGenerator.Scripts
             float myPosX = Mathf.Clamp01((transform.position.x + 50f) / 100f);
             float myPosY = Mathf.Clamp01((transform.position.y + 50f) / 100f);
             float myPosZ = Mathf.Clamp01((transform.position.z + 50f) / 100f);
-            Material myMaterial = new Material(cubeRenderer.material);
+            myMaterial = new Material(cubeRenderer.material);
             myMaterial.color = Color.HSVToRGB(myPosX, myPosY, myPosZ);
             cubeRenderer.material = myMaterial;
+            //cubeRenderer.material.color = new Color(cubeRenderer.material.color.r, cubeRenderer.material.color.g, cubeRenderer.material.color.b, cubeRenderer.material.color.a-0.5f);
 
             GenerateAnnexes();
         }

@@ -1,5 +1,5 @@
-- Menu za startanje igre gdje mozes opcionalno upisati seed manualno i promjeniti neke postvke (npr. vrijeme)
-- Opcija za gradualno mjenjanje boje tla ovisno o poziciji (npr. hue za x)
++- Menu za startanje igre gdje mozes opcionalno upisati seed manualno i promjeniti neke postvke (npr. vrijeme)
++ Opcija za gradualno mjenjanje boje tla ovisno o poziciji (npr. hue za x)
 - Opcija da mozes floatati, ali se vrijeme brze trosi dok to radis
 - Opcija da se mozes launchati jako visoko za -10 sekundi (ili 1/30 vremena)
 - Opcija da se tijekom zadnjih 30 sekundi (ili 1/10 vremena) se transparentnost materijala gradualno sve vise povecava (da lakse seeker pronadje hidera)

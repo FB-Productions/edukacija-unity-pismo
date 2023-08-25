@@ -1,0 +1,12 @@
+- nema konteksta: od koga se sakrivaš, tko je tko i što rade
+- nije jasno respawnanje (može npr trampolin)
+- nije jasno tko otkuda kreće
+- tri ograničenja: vrijeme (prekratko za hiding), prostorno pamćenje (teško upiti/analizirati prostor - teško manageati kontrole i analizirati prostor u isto vrijeme), hider ne može bježati (dodaj to i monetiziraj)
+- tri načina za se skriti: rupe, sjene i (trenutno) crveni balkoni
+- nema how to play i sl.
+- dati ideje kako i gdje se možeš sakriti (taktike)
+- minimapa s fog of war konceptom (Ariadnina nit - Minotaur i labirint)
+- breadcrumbing (ostavljanje tragova) -> može biti posebni mode (oboje na početku znaju da hider ostavlja tragove svako n sekundi)
+- chameleon mode (ili monetizacija)
+- super mario galaxy gravity stavi na level [MASTER FEEDBACK ALERT!]
+- pitchaj pine studiju kao igru sa user made levelima (ili useri prave template levele za proceduralno generiranje)
