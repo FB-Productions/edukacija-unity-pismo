@@ -1,0 +1,1 @@
+Dok Player dira moving platformu, neka je child te platforme - to popravlja ne praćenje platformi.
