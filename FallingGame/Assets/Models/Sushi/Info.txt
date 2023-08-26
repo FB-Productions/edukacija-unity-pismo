@@ -1,0 +1,16 @@
+-Positive (Japanska hrana da Panda jede)-
+Dango
+Dumpling
+Maki
+Nigiri
+Onigiri
+
+-Negative ()-
+Mala zdjelica
+Sake cup
+Sake vrč
+Štapići
+Zdjela
+
+-Player-
+Panda

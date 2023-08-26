@@ -1,0 +1,29 @@
+- Caring Mother (panda with heart or hair bow) is the one throwing all the good items (especially prominent in chain bonuses)
+- Evil Bro (inverted color panda) throws each bad object down
+- camera zooms out from the player(s) when starting the level
++ make bouncy scale animation (that does NOT affect the collision box) for Player, to be used each time you gain a point (ie collect a thing)
++ chain: if you collect 3 of the same food in a row, get a temporary bonus (bigger score, special foods, no neg items or all of these); have ui slots below score that update to show the last 3 collected foods (they don't update while the bonus is active)
+- faster!!!: every n seconds or spawns, temporarily increase the speed (decrease spawn time and maybe gravity drag) by a lot (keep incremental 13 second speedups - those are separate)
+- change lighting depending on how much time has passed or how many points were collected
+- have stickers (or models) of pandas, food or japanese things fill up sides of the screen and dance when something cool happens
++- cute, calm music for generic gameplay (maybe with a night variant), hyperactive japanesey or panda music for bonuses and faster segments
++- sound effects
+- add items/powerups:
+	- Positive attractor, Negative reppelent (slightly pulls food towards you and slightly pushes negative stuff away; all in one item)
+	- Mega positive (makes all positive items twice the size)
+	- 
+- two player mode?
+
+Menu:
++ Start - show the following submenu
+   - Peckish (Easy)
+   +- Hungry (Normal)
+   - Starving (Hard, unlockable)
+   - Famished (Very hard, secret unlockable)
+- Continue - load the game if you quit without finishing
++- Hall of fame - scoreboard
+- Gallery - closeup showcase and description of all the food and items (ala Melee trophies)
+- Settings
++ Exit
+
+During gameplay:
