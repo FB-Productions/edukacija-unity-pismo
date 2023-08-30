@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Panda Food Rush - Japan Edition/Menu.unity
-    guid: 3cf30c61eccd7ab44b22505de39ea841
+    path: Assets/Scenes/Menu.unity
+    guid: 962faf9ffed50704185cae4a2be07e3e
   - enabled: 1
-    path: Assets/Scenes/Panda Food Rush - Japan Edition/Game.unity
-    guid: aa3da9098c60892478c73da38dc30d02
+    path: Assets/Scenes/Game.unity
+    guid: 32a78e425a92d2b4d88471fbdaab4a8c
   m_configObjects: {}

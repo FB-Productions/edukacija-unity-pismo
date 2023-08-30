@@ -3,15 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Values")]
     public int score = 0;
     public int life = 3;
+    public string[] chainHistory;
+    bool gameOver;
+
+    [Header("UI")]
     public TMP_Text scoreText;
     public TMP_Text lifeText;
-    public string[] chainHistory;
     public TMP_Text chainText;
+
+    [Header("UI Groups")]
+    [SerializeField] GameObject HUD;
+    [SerializeField] GameObject gameOverMenu;
+    [SerializeField] GameObject pauseMenu;
+
+    [Header("Other")]
+    [SerializeField] PostProcessVolume vignette;
+    [SerializeField] AudioSource music;
+    float vignetteFadeInValue = 1;
+    float vignetteFadeOutValue = 0;
+
+    private void Start()
+    {
+        gameOver = false;
+    }
 
     private void Update()
     {
@@ -22,13 +44,53 @@ public class GameManager : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
-            Debug.Log("Quit");
+            HUD.SetActive(false);
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0;
+            music.volume = 0.3f;
+            StartCoroutine(VignetteFadeIn());
+            /*Application.Quit();
+            Debug.Log("Quit");*/
         }
 
-        if (life <= 0)
+        if (!gameOver)
         {
-            Debug.Log("Lose");
+            if (life <= 0)
+            {
+                HUD.SetActive(false);
+                gameOverMenu.SetActive(true);
+                Time.timeScale = 0;
+                music.Stop();
+                StartCoroutine(VignetteFadeIn());
+                gameOver = true;
+                Debug.Log("Lose");
+            }
         }
     }
+
+    public void BackToMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+    }
+
+    IEnumerator VignetteFadeIn()
+    {
+        while (vignette.weight < vignetteFadeInValue)
+        {
+            yield return null;
+            vignette.weight += Time.deltaTime;
+        }
+        vignette.weight = vignetteFadeInValue;
+    }
+    public IEnumerator VignetteFadeOut()
+    {
+        while (vignette.weight > vignetteFadeOutValue)
+        {
+            yield return null;
+            vignette.weight -= Time.deltaTime;
+        }
+        vignette.weight = vignetteFadeOutValue;
+    }
+
 }
