@@ -60,12 +60,29 @@ public class GameManager : MonoBehaviour
                 HUD.SetActive(false);
                 gameOverMenu.SetActive(true);
                 Time.timeScale = 0;
-                music.Stop();
+                music.volume = 0.3f;
+                music.pitch = 0.5f;
                 StartCoroutine(VignetteFadeIn());
                 gameOver = true;
                 Debug.Log("Lose");
             }
         }
+    }
+
+    public void Continue()
+    {
+        HUD.SetActive(true);
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+        music.volume = 1;
+        StartCoroutine(VignetteFadeOut());
+    }
+
+    public void PlayAgain()
+    {
+        // TODO
+        Debug.Log("Not implemented. Going back to main menu.");
+        BackToMenu();
     }
 
     public void BackToMenu()
@@ -79,7 +96,7 @@ public class GameManager : MonoBehaviour
         while (vignette.weight < vignetteFadeInValue)
         {
             yield return null;
-            vignette.weight += Time.deltaTime;
+            vignette.weight += Time.unscaledDeltaTime;
         }
         vignette.weight = vignetteFadeInValue;
     }
@@ -88,7 +105,7 @@ public class GameManager : MonoBehaviour
         while (vignette.weight > vignetteFadeOutValue)
         {
             yield return null;
-            vignette.weight -= Time.deltaTime;
+            vignette.weight -= Time.unscaledDeltaTime;
         }
         vignette.weight = vignetteFadeOutValue;
     }
