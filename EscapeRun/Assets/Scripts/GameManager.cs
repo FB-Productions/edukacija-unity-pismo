@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     float unscaledTimerInit = 2.5f;
     float levelTime;
     public TMP_Text textTime;
+    [SerializeField] GameObject quitButton;
 
     private void Start()
     {
@@ -93,6 +94,16 @@ public class GameManager : MonoBehaviour
                 unscaledTimer = unscaledTimerInit;
             }
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void LoseLife (int damage, float invincibilityTime)
@@ -138,11 +149,13 @@ public class GameManager : MonoBehaviour
     void Win()
     {
         textWin.gameObject.SetActive(true);
+        quitButton.SetActive(true);
     }
 
     void Lose()
     {
         textLose.gameObject.SetActive(true);
+        quitButton.SetActive(true);
     }
 
     public void ShowTime()

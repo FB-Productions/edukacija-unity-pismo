@@ -13,6 +13,7 @@ public class MyGameManager : MonoBehaviour
     [HideInInspector] public bool isXTurn = true;
     [SerializeField] TextMeshProUGUI winnerText;
     [HideInInspector] public int moves;
+    bool gameOver = false;
     int scoreX;
     int scoreO;
     [SerializeField] TextMeshProUGUI scoreXText;
@@ -32,6 +33,7 @@ public class MyGameManager : MonoBehaviour
         }*/
 
         isXTurn = true;
+        gameOver = false;
 
         //scoreXText.text = scoreX.ToString();
         //scoreOText.text = scoreO.ToString();
@@ -166,7 +168,7 @@ public class MyGameManager : MonoBehaviour
             str = "O";
         }
 
-        if (moves >= 9)
+        if (moves >= 9 && !gameOver)
         {
             lineNum = -1;
             AnnounceWinner(2); // izjednacenje
@@ -175,6 +177,8 @@ public class MyGameManager : MonoBehaviour
 
     void AnnounceWinner(byte whoWon)
     {
+        gameOver = true;
+        
         gameOverPanel.SetActive(true);
 
         if (lineNum != -1)
@@ -213,6 +217,7 @@ public class MyGameManager : MonoBehaviour
     {
         gameOverPanel.SetActive(false);
         moves = 0;
+        gameOver = false;
         isXTurn = true;
         if (lineNum != -1)
         {
